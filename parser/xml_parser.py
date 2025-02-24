@@ -40,7 +40,7 @@ class PubmedParser:
             
             for index, article in enumerate(all_articles, 1):
                 parsed_article = self._parse_article(index, article)
-                parsed_article["xml_file"] = file_path
+                parsed_article["xml_file"] = file_path.split("/")[-1]
                 articles.append(parsed_article)
                 
                 if show_progress:
@@ -69,7 +69,6 @@ class PubmedParser:
         for id_list in article.findall(".//ArticleId"):
             if id_list.attrib["IdType"] == "doi":
                 doi = id_list.text
-                break
 
         # 获取作者列表
         authors = []
